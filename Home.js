@@ -1,31 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,  Text, View, TouchableOpacity, Button } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <View style={styles.container}>
         <StatusBar style="auto" />
         <Text style={styles.welcome}>Welcome User.</Text>
         <Text style={styles.header}>How are we feeling today?</Text>
-        <TouchableOpacity
-          style={styles.neutral}
-          title="neutral-button"
-          onPress={() => {
-            console.log('user is feeling neutral')
-          }}
-        >
-          <Icon name="emoticon-neutral" size={40} color="yellow"/>
-        </TouchableOpacity>
+        {/* Icon Buttons */}
+        <View style={styles.moodButtons}>
+          <Icon onPress={() => navigation.navigate('CalendarPage')} name="square" size={40} color="red"/>
+          <Icon onPress={() => {console.log('test')}} name="square" size={40} color="orange"/>
+          <Icon onPress={() => {console.log('test')}} name="square" size={40} color="yellow"/>
+          <Icon onPress={() => {console.log('test')}} name="square" size={40} color="lightgreen"/>
+          <Icon onPress={() => {console.log('test')}} name="square" size={40} color="green"/>
+        </View>
 
-
-        <TouchableOpacity>
-            <Text style={{color: '#ff0000', backgroundColor: 'cyan'}}>TouchableOpacity Button</Text>
-        </TouchableOpacity>
-
-        <Button 
-            title="Regular Button"
-        />
     </View>
   )
 }
@@ -48,8 +39,10 @@ const styles = StyleSheet.create({
         fontSize: '25px',
         color: 'white',
     },
-    neutral: {
-        bottom: '15%',
+    moodButtons: {
+        bottom: '36%',
+        alignContent: 'center',
+        flexDirection: 'row',
     },
   });
   
