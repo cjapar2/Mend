@@ -9,7 +9,8 @@ import VoiceMemo from './VoiceMemo';
 
 export default function CalendarPage({navigation}) {
     return (
-        <View>
+        <View style={styles.container}>
+            <Text>Calendar Page</Text>
             <Button
                 title="textButton"
                 onPress={() => navigation.navigate('TextMemo')}
@@ -25,3 +26,13 @@ export default function CalendarPage({navigation}) {
         </View>
     )
 }
+
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#20444c',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+  });
