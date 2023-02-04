@@ -89,7 +89,7 @@ export default function Home({navigation}) {
         <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
         <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
         <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('QuestionPage')} name="comment-question" size={70} color="black"/>
 
         {/* THIS IS JUST A PLACE HOLDER */}
         <MCIcon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
