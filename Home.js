@@ -8,7 +8,7 @@ import {
   Button,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default function Home({navigation}) {
   const [mood, setMood] = React.useState('')
@@ -35,7 +35,8 @@ export default function Home({navigation}) {
         <StatusBar style="auto" />
         <Text style={styles.welcome}>Welcome User.</Text>
         <Text style={styles.header}>How are we feeling today?</Text>
-        {/* Icon Buttons */}
+
+        {/* Color Square Buttons */}
         <View style={styles.moodButtons}>
             <Icon onPress={() => saveMood('sad')} name="square" size={50} color="red"/>
             <Icon onPress={() => saveMood('kinda sad')} name="square" size={50} color="orange" />
@@ -44,6 +45,19 @@ export default function Home({navigation}) {
             <Icon onPress={() => saveMood('happy')} name="square" size={50} color="green"/>
             <Icon onPress={() => saveMood('sad')} name="square" size={50} color="green"/>
         </View>
+
+
+        {/* Icon NavBar Buttons */}
+        <View style={styles.NavBarButtons}>
+        <Icon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
+        <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
+        <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
+        <Icon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
+
+        {/* THIS IS JUST A PLACE HOLDER */}
+        <Icon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
+        </View>
+
     </View>
   )
 }
@@ -71,5 +85,12 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         flexDirection: 'row',
     },
+
+    NavBarButtons: {
+      top: '80%',
+      alignContent: 'center',
+      flexDirection: 'row',
+      marginHorizontal:50,
+    }
   });
   
