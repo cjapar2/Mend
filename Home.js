@@ -73,7 +73,12 @@ export default function Home({navigation}) {
         {/* Icon Buttons */}
         <View style={styles.moodButtons}>
           {allEmotions.map((emotion)=>{
-            return <FAIcon style={styles.moodButton}key={emotion.color} onPress={()=>saveMood(emotion.color,emotion.emotion)} name="square" size={50} color={emotion.color}/>
+            return (
+              <View key={emotion.color} style={styles.moodButtonView}>
+                <FAIcon style={styles.moodButton} onPress={()=>saveMood(emotion.color,emotion.emotion)} name="square" size={50} color={emotion.color}/>
+                <Text style={styles.moodSquareEmotionText}>{emotion.emotion}</Text>
+              </View>
+            )
           })}
 
           <FAIcon style={styles.moodButton}onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={50} />
@@ -102,7 +107,10 @@ const styles = StyleSheet.create({
       height:'100%'
     },
     moodButton:{
-      margin:10
+      marginLeft:10,
+      marginRight:10,
+      marginTop:10,
+      marginBottom:6
     },
     welcome: {
       bottom: '27%',
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap:'wrap',
         borderRadius:'5px',
-        borderWidth:'5px',
+        borderWidth:'2px',
     },
     moreMoodButtons: {
       justifyContent: 'center',
@@ -182,6 +190,16 @@ const styles = StyleSheet.create({
     colorSelectorView:{
       height:"40%",
       marginBottom:"15%"
+    },
+    moodSquareEmotionText:{
+      fontSize:"14px",
+      color:'#000000',
+      marginLeft:'auto',
+      marginRight:'auto'
+    },
+    moodButtonView:{
+      flexDirection:"wrap"
     }
+
   });
   
