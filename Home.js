@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ColorPicker from 'react-native-wheel-color-picker'
+import { LinearGradient } from 'expo-linear-gradient';
  
 
 
@@ -52,6 +53,15 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
+
+<LinearGradient
+        // Background Linear Gradient
+        colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
+        start={{ x: 0.7, y: 0 }}
+        style={styles.GradientBG}
+      />
+
+
       <Modal style={styles.modalContainer}visible={isPoppedUp} animationType="slide" transparent={true} onRequestClose={()=>{setIsPoppedUp(false)}}>
         <View style={styles.popUpHeader}>
         <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setIsPoppedUp(false)}></FAIcon>
@@ -101,10 +111,17 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#20444c',
+      backgroundColor: 'transparent',
       alignItems: 'center',
       justifyContent: 'center',
       height:'100%'
+    },
+    GradientBG: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 1000
     },
     moodButton:{
       marginLeft:10,
