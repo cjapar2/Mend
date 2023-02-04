@@ -10,7 +10,7 @@ export default function CalendarPage({navigation}) {
 
     /* Function that loads mood to local storage */
     /* TODO: Use this data to individually color calendar days */
-    const loadMood = async () => {
+    const loadMoodColor = async () => {
         try {
             // create date object
             let d = new Date();
