@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,  Text, View, TouchableOpacity, Button , Modal, TextInput} from 'react-native';
 import {useState, useEffect} from 'react'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ColorPicker from 'react-native-wheel-color-picker'
 
 export default function Home({navigation}) {
@@ -17,11 +18,31 @@ export default function Home({navigation}) {
     setIsPoppedUp(false)
 
   }
+  const [mood, setMood] = useState('')
+  
+  /* Function that saves mood to local storage */
+  const saveMood = async (e) => {
+    try {
+      console.log('e', e);
+      const d = new Date();
+      let dFormatted = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
+      // set key with value e
+      await AsyncStorage.setItem(dFormatted, e);
+      // test data
+      await AsyncStorage.setItem('test', 'this shows up if key is test')
+      console.log('stored data', e);
+      // navigate to calendar page
+      navigation.navigate('CalendarPage');
+    } catch (err) {
+      alert(err);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Modal style={styles.modalContainer}visible={isPoppedUp} animationType="slide" transparent={true} onRequestClose={()=>{setIsPoppedUp(false)}}>
         <View style={styles.popUpHeader}>
-        <Icon style={styles.popUpClose} size={20}name="close" onPress={()=>setIsPoppedUp(false)}></Icon>
+        <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setIsPoppedUp(false)}></FAIcon>
         <Text style={styles.popUpHeaderText}>Add a New Emotion</Text>
         <TextInput style={styles.newEmotionText} placeholder="Enter Emotion" placeholderTextColor="#000000" value={emotion} onChangeText={(val)=>setEmotionChange(val)}></TextInput>
         <Text style={styles.colorChooseText}>Select a Color:</Text>
@@ -70,9 +91,18 @@ export default function Home({navigation}) {
           <Icon onPress={() => {console.log('test')}} name="square" size={40} color="lightgreen"/>
           <Icon onPress={() => {console.log('test')}} name="square" size={40} color="green"/>
           <Icon onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={40} />
->>>>>>> 32107c9ca000493069aef94450a3bf33faf623d6
         </View>
 
+        {/* Icon NavBar Buttons */}
+        <View style={styles.NavBarButtons}>
+        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
+
+        {/* THIS IS JUST A PLACE HOLDER */}
+        <MCIcon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
+        </View>
     </View>
   )
 }
