@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import TextMemo from './TextMemo';
+import JournalPage from './JournalPage';
 import VoiceMemo from './VoiceMemo';
 
 export default function CalendarPage({navigation}) {
@@ -23,6 +23,15 @@ export default function CalendarPage({navigation}) {
             >
                 test
             </Button>
+<<<<<<< Updated upstream
+=======
+            <TouchableOpacity style={styles.textButton}
+                title="textButton"
+                onPress={() => navigation.navigate('JournalPage')}
+            >
+                <Text>Journal Entry</Text>
+            </TouchableOpacity>
+>>>>>>> Stashed changes
         </View>
     )
 }
