@@ -6,9 +6,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import TextMemo from './TextMemo';
-import VoiceMemo from './VoiceMemo';
-
 export default function CalendarPage({navigation}) {
 
     /* Function that loads mood to local storage */
