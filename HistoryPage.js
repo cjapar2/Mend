@@ -5,10 +5,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet,  Text, View, TouchableOpacity, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function HistoryPage({navigation}) {
     return (
         <View style={styles.container}>
+
+<LinearGradient
+        // Background Linear Gradient
+        colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
+        style={styles.GradientBG}
+      />
 
 
         <View style={styles.BigMainRectangle}>
@@ -28,10 +35,9 @@ export default function HistoryPage({navigation}) {
 
              {/* Icon NavBar Buttons */}
              <View style={styles.NavBarButtons}>
-             <Icon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
-             <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
-             <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
-             <Icon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
+             <Icon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
+             <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
+             <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
             </View>
 
         </View>
@@ -41,19 +47,18 @@ export default function HistoryPage({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#e8e6d9',
+    backgroundColor: 'transparent',
       alignItems: 'center',
       justifyContent: 'center',
     },
     NavBarButtons: {
         top: '10%',
         alignContent: 'center',
+        justifyContent: 'space-evenly',
         flexDirection: 'row',
-        marginHorizontal:50,
-        marginTop:10,
       },
     BigMainRectangle: {
-        backgroundColor: 'black',
+        backgroundColor: '#bdb8a5',
         top:'3%',
         height: 710,
         width: 390,
@@ -97,4 +102,11 @@ const styles = StyleSheet.create({
         color: 'black',
         margin: 1, 
     },
+    GradientBG: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        height: 1000
+      },
   });

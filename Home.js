@@ -60,7 +60,11 @@ export default function Home({navigation}) {
         start={{ x: 0.7, y: 0 }}
         style={styles.GradientBG}
       />
+        <Text style={styles.welcome}>Welcome!</Text>
+        <Text style={styles.MendMissionStatement}>Helping mend your day one color at a a time</Text>
+        
 
+<Text style={styles.header}>What color describes your mood today?</Text>
 
       <Modal style={styles.modalContainer}visible={isPoppedUp} animationType="slide" transparent={true} onRequestClose={()=>{setIsPoppedUp(false)}}>
         <View style={styles.popUpHeader}>
@@ -78,32 +82,31 @@ export default function Home({navigation}) {
         </View>
       </Modal>
         <StatusBar style="auto" />
-        <Text style={styles.welcome}>Welcome User.</Text>
-        <Text style={styles.header}>How are we feeling today?</Text>
+
         {/* Icon Buttons */}
         <View style={styles.moodButtons}>
           {allEmotions.map((emotion)=>{
             return (
               <View key={emotion.color} style={styles.moodButtonView}>
-                <FAIcon style={styles.moodButton} onPress={()=>saveMood(emotion.color,emotion.emotion)} name="square" size={50} color={emotion.color}/>
+                <FAIcon style={styles.moodButton} onPress={()=>saveMood(emotion.color,emotion.emotion)} name="square" size={85} color={emotion.color}/>
                 <Text style={styles.moodSquareEmotionText}>{emotion.emotion}</Text>
               </View>
             )
+            
           })}
 
           <FAIcon style={styles.moodButton}onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={50} />
         </View>
 
+
+
         {/* Icon NavBar Buttons */}
         <View style={styles.NavBarButtons}>
-        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('QuestionPage')} name="comment-question" size={70} color="black"/>
-
-        {/* THIS IS JUST A PLACE HOLDER */}
-        <MCIcon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="FF8547"/>
         </View>
+        
     </View>
   )
 }
@@ -130,9 +133,22 @@ const styles = StyleSheet.create({
       marginBottom:6
     },
     welcome: {
-      bottom: '27%',
-      right: '18%',
-      fontSize: '30px',
+      position: 'relative',
+      bottom: '26%',
+      right: '24%',
+      fontSize: '34px',
+      fontWeight: '700',
+      color: 'white',
+      animationType:'fade-in',
+      
+    },
+    MendMissionStatement: {
+      bottom: '26%',
+      padding: 3,
+      right: '7%',
+      fontSize: '14 px',
+      fontStyle: 'italic',
+      fontWeight: '300',
       color: 'white',
       animationType:'fade-in'
     },
@@ -142,7 +158,12 @@ const styles = StyleSheet.create({
       bottom:"1%"
     },
     header: {
-      bottom: '20%',
+      bottom: '23%',
+      alignContent: 'center',
+      justifyContent: 'center',
+      left: '2%',
+      fontStyle: 'italic',
+      fontWeight: '600',
       fontSize: '25px',
       color: 'white',
     },
@@ -216,7 +237,7 @@ const styles = StyleSheet.create({
     },
     moodButtonView:{
       flexDirection:"wrap"
-    }
+    },
 
   });
   
