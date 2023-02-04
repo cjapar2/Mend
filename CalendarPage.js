@@ -32,12 +32,12 @@ export default function CalendarPage({navigation}) {
         <View style={styles.container} theme={{textDayFontSize: 200}}>
             <Calendar style={styles.calendar}/>
             <Icon style={styles.voiceButton} name="microphone"
-                onPress={() => navigation.navigate('TextMemo')}
+                onPress={() => navigation.navigate('JournalPage')}
                 size={30}
             />
             <TouchableOpacity style={styles.textButton}
                 title="textButton"
-                onPress={() => navigation.navigate('TextMemo')}
+                onPress={() => navigation.navigate('JournalPage')}
             >
                 <Text>Journal Entry</Text>
             </TouchableOpacity>
