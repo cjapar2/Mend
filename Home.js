@@ -34,18 +34,24 @@ export default function Home({navigation}) {
     <View style={styles.container}>
         <StatusBar style="auto" />
         <Text style={styles.welcome}>Welcome User.</Text>
-        <Text style={styles.header}>How are we feeling today?</Text>
+        <Text style={styles.MendWelcome}>Helping mend your mood one day at a time!</Text>
 
-        {/* Color Square Buttons */}
-        <View style={styles.moodButtons}>
-            <Icon onPress={() => saveMood('sad')} name="square" size={50} color="red"/>
-            <Icon onPress={() => saveMood('kinda sad')} name="square" size={50} color="orange" />
-            <Icon onPress={() => saveMood('neutral')} name="square" size={50} color="yellow"/>
-            <Icon onPress={() => saveMood('kinda happy')} name="square" size={50} color="lightgreen"/>
-            <Icon onPress={() => saveMood('happy')} name="square" size={50} color="green"/>
-            <Icon onPress={() => saveMood('sad')} name="square" size={50} color="green"/>
-        </View>
+         <View style={styles.BigRectangle}>
+            <Text style={styles.header}>How are we feeling today?</Text>
 
+            {/* Color Square Buttons */}
+             <View style={styles.moodButtons}>
+                <Icon onPress={() => saveMood('sad')} name="square" size={50} color="red"/>
+                <Icon onPress={() => saveMood('kinda sad')} name="square" size={50} color="orange" />
+                <Icon onPress={() => saveMood('neutral')} name="square" size={50} color="yellow"/>
+                <Icon onPress={() => saveMood('kinda happy')} name="square" size={50} color="lightgreen"/>
+                <Icon onPress={() => saveMood('happy')} name="square" size={50} color="green"/>
+                <Icon onPress={() => saveMood('sad')} name="square" size={50} color="green"/>
+            </View> 
+
+
+
+       </View>
 
         {/* Icon NavBar Buttons */}
         <View style={styles.NavBarButtons}>
@@ -70,10 +76,19 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     welcome: {
-        bottom: '30%',
-        right: '0%',
-        fontSize: '30px',
-        color: 'white',
+        bottom: '5%',
+        right: '14%',
+        fontSize: '35px',
+        fontWeight: '900',
+        color: 'black',
+    },
+    MendWelcome:{
+      bottom: '4%',
+      right: '4%',
+      fontSize: '15px',
+      fontStyle: 'italic',
+      fontWeight: '400',
+      color: 'black',
     },
     header: {
         bottom: '28%',
@@ -85,12 +100,20 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         flexDirection: 'row',
     },
-
     NavBarButtons: {
-      top: '80%',
+      top: '20%',
       alignContent: 'center',
       flexDirection: 'row',
       marginHorizontal:50,
+    },
+    BigRectangle: {
+      backgroundColor: 'black',
+      justifyContent: 'center',
+      alignItems: 'center',
+      top:'6%',
+      height: 570,
+      width: 360,
+      borderRadius: 19,
     }
   });
   
