@@ -32,9 +32,6 @@ export default function HistoryPage({navigation}) {
              <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
              <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
              <Icon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
-
-             {/* THIS IS JUST A PLACE HOLDER */}
-             <Icon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
             </View>
 
         </View>
