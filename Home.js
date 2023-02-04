@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ColorPicker from 'react-native-wheel-color-picker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Home({navigation}) {
   const [isPoppedUp, setIsPoppedUp] = useState(false)
@@ -50,33 +51,36 @@ export default function Home({navigation}) {
         <Button style={styles.newEmotionButton}title="Create" onPress={()=>handlePopupClose()}></Button>
         </View>
       </Modal>
-        <StatusBar style="auto" />
-        <Text style={styles.welcome}>Welcome User.</Text>
+      
+      <StatusBar style="auto" />
+      <Text style={styles.welcome}>Welcome User.</Text>
+      <Text style={styles.header}>How are we feeling today?</Text>
+
+      <View style={styles.BigRectangle}>
         <Text style={styles.header}>How are we feeling today?</Text>
-
-        <View style={styles.BigRectangle}>
-          <Text style={styles.header}>How are we feeling today?</Text>
-          {/* Icon Buttons */}
-          <View style={styles.moodButtons}>
-            <FAIcon onPress={() => saveMood('date', 'red', 'sad')} name="square" size={50} color="red"/>
-            <FAIcon onPress={() => saveMood('orange')} name="square" size={50} color="orange" />
-            <FAIcon onPress={() => saveMood('yellow')} name="square" size={50} color="yellow"/>
-            <FAIcon onPress={() => saveMood('lightgreen')} name="square" size={50} color="lightgreen"/>
-            <FAIcon onPress={() => saveMood('green')} name="square" size={50} color="green"/>
-            <FAIcon onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={40} />
-          </View>
+        {/* Icon Buttons */}
+        <View style={styles.moodButtons}>
+          <FAIcon style={{marginLeft: 30}} onPress={() => saveMood('date', 'red', 'sad')} name="square" size={50} color="red"/>
+          <FAIcon style={{marginLeft: 30}} onPress={() => saveMood('orange')} name="square" size={50} color="orange" />
+          <FAIcon style={{marginLeft: 30}} onPress={() => saveMood('yellow')} name="square" size={50} color="yellow"/>
         </View>
+        <View style={styles.moreMoodButtons}>
+          <FAIcon style={{marginLeft: 30}} onPress={() => saveMood('lightgreen')} name="square" size={50} color="lightgreen"/>
+          <FAIcon style={{marginLeft: 30}} onPress={() => saveMood('green')} name="square" size={50} color="green"/>
+          <FAIcon style={{marginLeft: 30}} onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={50} />
+        </View>
+      </View>
 
-        {/* Icon NavBar Buttons */}
-        <View style={styles.NavBarButtons}>
-        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="black"/>
-        <MCIcon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={70} color="black"/>
+      {/* Icon NavBar Buttons */}
+      <View style={styles.NavBarButtons}>
+        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={50} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={50} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={50} color="black"/>
+        <MCIcon onPress={() => navigation.navigate('JournalPage')} name="comment-question" size={50} color="black"/>
 
         {/* THIS IS JUST A PLACE HOLDER */}
-        <MCIcon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={70} color="black"/>
-        </View>
+        <MCIcon onPress={() => navigation.navigate('VoiceMemo')} name="account-alert" size={50} color="black"/>
+      </View>
     </View>
   )
 }
@@ -90,20 +94,25 @@ const styles = StyleSheet.create({
       height:'100%'
     },
     welcome: {
-        bottom: '27%',
-        right: '18%',
-        fontSize: '30px',
-        color: 'white',
+      bottom: '27%',
+      right: '18%',
+      fontSize: '30px',
+      color: 'white',
     },
     header: {
-        bottom: '20%',
-        fontSize: '25px',
-        color: 'white',
+      bottom: '20%',
+      fontSize: '25px',
+      color: 'white',
     },
     moodButtons: {
-        bottom: '36%',
-        alignContent: 'center',
-        flexDirection: 'row',
+      bottom: '20%',
+      flexDirection: 'row',
+    },
+    moreMoodButtons: {
+      justifyContent: 'center',
+      bottom: '20%',
+      flexDirection: 'row',
+      marginTop: 25,
     },
     popUpHeader:{
       alignItems:'center',
@@ -132,7 +141,6 @@ const styles = StyleSheet.create({
       marginRight:'auto',
       bottom:'25%',
       flex:1
-
     },
     colorChooseText:{
       fontSize:'25px',
@@ -149,13 +157,19 @@ const styles = StyleSheet.create({
       marginBottom:"20%"
     },
     BigRectangle: {
-      backgroundColor: 'cyan',
+      display: 'flex',
+      backgroundColor: 'grey',
       justifyContent: 'center',
       alignItems: 'center',
-      top:'6%',
+      top:-50,
       height: 570,
       width: 360,
       borderRadius: 19,
+    },
+    NavBarButtons: {
+      bottom: '-10%',
+      alignContent: 'center',
+      flexDirection: 'row',
     },
   });
   
