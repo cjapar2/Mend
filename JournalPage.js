@@ -2,9 +2,10 @@
 // Changes made by DAANISH KHAN
 
 import React from 'react';
-import { StyleSheet,  Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet,  Text, View, TouchableOpacity, Button,Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { TextInput, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import {useEffect} from 'react'
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
@@ -13,9 +14,16 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 // const TextInputExample = () => {
 //   const [text, onChangeText] = React.useState('How are you feeling?');
 
-const MultilineTextInputExample = () => {
-  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
+export default function JournalPage({navigation}){
+  const [value, onChangeText] = React.useState();
 
+  useEffect(()=>{
+    console.log(value)
+  },[value])
+
+  const submitJournalEntry = () =>{
+    navigation.navigate('CalendarPage',value)
+  }
   return (
     <View style={styles.container}>
 
@@ -25,7 +33,7 @@ const MultilineTextInputExample = () => {
         start={{ x: 0.7, y: 0 }}
         style={styles.GradientBG}
 />
-          <Text style={styles.JournalEntry}>Today's Journal Entry</Text>
+          <Text style={styles.JournalEntryHeader}>Today's Journal Entry</Text>
 
           <View
       style={{
@@ -34,17 +42,14 @@ const MultilineTextInputExample = () => {
         borderBottomWidth: 3,
         fontSize: '24',
       }}>
-
-          <TextInput
-        editable
-        multiline
-        numberOfLines={4}
-        onChangeText={text => onChangeText(text)}
-        value={value}
-        style={{padding: 10}}
-        returnKeyType="done"
-        
-      />
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+          <View style={styles.JournalEntryWrapper}>
+            <TextInput textAlignment="center"multiline={true} underlineColorAndroid="transparent" style={styles.JournalEntry} placeholder="Start Typing Here..." onChangeText={onChangeText
+            }></TextInput>
+          </View>
+          </TouchableWithoutFeedback>
+          
+          <TouchableOpacity style={styles.submitJournalEntryButton} onPress={submitJournalEntry()}><Text style={styles.submitText}>Submit</Text></TouchableOpacity>
 
 
  </View>
@@ -70,12 +75,7 @@ const MultilineTextInputExample = () => {
     
     </View>
 
-
-    
-
-    
-  );
-};
+)}
 
 const styles = StyleSheet.create({
   container: {
@@ -83,15 +83,37 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     alignItems: 'center',
     justifyContent: 'center',
-    height:'100%'
+    height:'100%',
+    position:'relative'
   },
-  JournalEntry: {
-    bottom:'37%',
+  submitText:{
+    marginLeft:'auto',
+    marginRight:'auto',
+    marginTop:'auto',
+    fontSize:35,
+    fontWeight:'700',
+    color:'white'
+  },
+  submitJournalEntryButton:{
+      borderWidth:'5px',
+      borderColor:'white',
+      borderRadius:'3px',
+      backgroundColor:'transparent',
+      width:150,
+      height:50,
+      bottom:30,
+      marginBottom:'auto',
+      marginTop:'auto'
+      
+  },
+  JournalEntryHeader: {
+    bottom:'3%',
     alignContent:'center',
     fontSize: '29px',
     fontWeight: '700',
     color: 'white',
     animationType:'fade-in',
+    position:'fixed'
   },
   GradientBG: {
     position: 'absolute',
@@ -107,8 +129,20 @@ const styles = StyleSheet.create({
     position:'absolute',
     bottom:"1%"
   },
+  JournalEntry:{
+    outline:'none',
+    position:'fixed',
+    marginRight:'auto',
+    marginLeft:'auto',
+    margin:20,
+    borderBottomColor:'transparent',
+  },
+  JournalEntryWrapper:{
+    width:'90%',
+    height:'70%'
+  }
+
 
 },);
 
-export default MultilineTextInputExample;
 
