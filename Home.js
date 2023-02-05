@@ -28,6 +28,16 @@ const styles = StyleSheet.create({
       backgroundColor: '#20444c',
       alignItems: 'center',
       justifyContent: 'center',
+<<<<<<< Updated upstream
+=======
+      height:'100%'
+    },
+    moodButton:{
+      marginLeft:20,
+      marginRight:10,
+      marginTop:10,
+      marginBottom:6
+>>>>>>> Stashed changes
     },
     welcome: {
         bottom: '30%',
