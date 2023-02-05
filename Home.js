@@ -4,7 +4,9 @@ import {useState, useEffect} from 'react'
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ColorPicker from 'react-native-wheel-color-picker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LinearGradient } from 'expo-linear-gradient';
+
  
 
 
@@ -13,18 +15,7 @@ export default function Home({navigation}) {
   const [newEmotionColor, setNewEmotionColor] = useState("#aabbcc")
   const [emotionText, setEmotionChange] = useState('')
   const [allEmotions, setAllEmotions] = useState([{color:'#FF0000', emotion:'sad'},{color:'#FFA500',emotion:''},{color:'#FFFF00',emotion:''},{color:'#90EE90',emotion:''},{color:'#228B22',emotion:''}])
-  useEffect(()=>{
-    allEmotions.map((emotion)=>{
-      console.log(emotion)
-    })
-  })
-  useEffect(()=>{
-    console.log(newEmotionColor)
-  },[newEmotionColor])
   const handlePopupClose = () =>{
-    
-    console.log("exited")
-    console.log(emotionText,newEmotionColor)
     setIsPoppedUp(false)
     let temp = allEmotions
     temp.push({color:newEmotionColor,emotion:emotionText })
@@ -40,12 +31,11 @@ export default function Home({navigation}) {
       const d = new Date();
       let dFormatted = d.getDate() + '-' + d.getMonth() + '-' + d.getFullYear();
       // set key with value e
-      await AsyncStorage.setItem(dFormatted, e);
-      // test data
-      await AsyncStorage.setItem('test', 'this shows up if key is test')
-      console.log('stored data', e);
+      // // test data
+      // await AsyncStorage.setItem('test', 'this shows up if key is test')
+      // console.log('stored data', e);
       // navigate to calendar page
-      navigation.navigate('CalendarPage');
+      navigation.navigate('CalendarPage',e);
     } catch (err) {
       alert(err);
     }
@@ -114,17 +104,10 @@ export default function Home({navigation}) {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'transparent',
+      backgroundColor: '#20444c',
       alignItems: 'center',
       justifyContent: 'center',
       height:'100%'
-    },
-    GradientBG: {
-      position: 'absolute',
-      left: 0,
-      right: 0,
-      top: 0,
-      height: 1000
     },
     moodButton:{
       marginLeft:10,

@@ -5,11 +5,30 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useEffect, useState} from 'react'
 
-export default function CalendarPage({navigation}) {
+
+export default function CalendarPage({route}) {
+    const [calendarColorData, setCalendarColorData] = useState({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true}})
+    const [isLoading, setIsLoading] = useState(true)
 
     /* Function that loads mood to local storage */
     /* TODO: Use this data to individually color calendar days */
+
+    useEffect(()=>{
+        if (route.params !== undefined){
+            let d = new Date();
+            let dFormatted = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
+            temp['2023-02-04'] = {color:route.params, startingDay:true, endingDay:true}
+            setCalendarColorData(temp)
+        }
+        loadMoodColor()
+
+    },[])
+    useEffect(()=>{
+        console.log(calendarColorData)
+        calendarColorData = Object.assign(calendarColorData)
+    },[calendarColorData])
     const loadMoodColor = async () => {
         try {
             // create date object
@@ -17,20 +36,13 @@ export default function CalendarPage({navigation}) {
             // format date DD-MM-YYYY
             let dFormatted = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
             console.log('current date', dFormatted);
-            let mood = await AsyncStorage.getItem(dFormatted);
-            // get test data
-            let test = await AsyncStorage.getItem('test')
-            console.log('test data:', test)
-            if (mood != null) {
-                console.log(mood);
-            }
         } catch (err) {
             alert(err);
         }
     }
     return (
         <View style={styles.container} theme={{textDayFontSize: 200}}>
-            <Calendar style={styles.calendar}/>
+            <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}/>
             <Icon style={styles.voiceButton} name="microphone"
                 onPress={() => navigation.navigate('JournalPage')}
                 size={30}
