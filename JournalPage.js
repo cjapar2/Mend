@@ -21,7 +21,7 @@ const TextInputExample = () => {
         colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
         start={{ x: 0.7, y: 0 }}
         style={styles.GradientBG}
-      />
+/>
 
           <Text style={{fontSize: 20, margin: 80, textAlign: 'center'}}>
             Today's Journal Entry
@@ -30,7 +30,14 @@ const TextInputExample = () => {
          <TextInput
             style={styles.input} 
             placeholder="How are you feeling today?"
-         />
+        />
+
+        {/* Icon NavBar Buttons */}
+        <View style={styles.NavBarButtons}>
+        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
+        </View>
     
     </SafeAreaView>
 
