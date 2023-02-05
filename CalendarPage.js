@@ -50,9 +50,9 @@ export default function CalendarPage({route}) {
     return (
         <View style={styles.container} theme={{textDayFontSize: 200}}>
 
-            <Modal style={{}} visible={modalVisible}>
+            <Modal style={{width: '20'}} visible={modalVisible}>
                 <View style={styles.popUpHeader}>
-                    <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setModalVisible(false)}></FAIcon>
+                    <FAIcon style={styles.popUpClose} size={30} name="close" onPress={()=>setModalVisible(false)}></FAIcon>
                     <Text style={styles.popUpHeader}>Current Day: {modalDate["day"]}</Text>
                 </View>
             </Modal>

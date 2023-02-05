@@ -14,7 +14,7 @@ export default function Home({navigation}) {
   const [isPoppedUp, setIsPoppedUp] = useState(false)
   const [newEmotionColor, setNewEmotionColor] = useState("#aabbcc")
   const [emotionText, setEmotionChange] = useState('')
-  const [allEmotions, setAllEmotions] = useState([{color:'#FF0000', emotion:'sad'},{color:'#FFA500',emotion:''},{color:'#FFFF00',emotion:''},{color:'#90EE90',emotion:''},{color:'#228B22',emotion:''}])
+  const [allEmotions, setAllEmotions] = useState([{color:'#FF0000', emotion:''},{color:'#FFA500',emotion:''},{color:'#FFFF00',emotion:''},{color:'#90EE90',emotion:''},{color:'#228B22',emotion:''}])
   const handlePopupClose = () =>{
     setIsPoppedUp(false)
     let temp = allEmotions
@@ -58,20 +58,14 @@ export default function Home({navigation}) {
 
       <Modal style={styles.modalContainer}visible={isPoppedUp} animationType="slide" transparent={true} onRequestClose={()=>{setIsPoppedUp(false)}}>
         <View style={styles.popUpHeader}>
-        <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setIsPoppedUp(false)}></FAIcon>
-        <Text style={styles.popUpHeaderText}>Add a New Emotion</Text>
-        
-        <TextInput style={styles.newEmotionText} placeholder="Enter Emotion" placeholderTextColor="#000000" value={emotionText} onChangeText={(val)=>setEmotionChange(val)}></TextInput>
-        
-        <Text style={styles.colorChooseText}>Select a Color:</Text>
-
-        <View style={styles.colorSelectorView}>
-            <ColorPicker
-        onColorChange={(color)=>{setNewEmotionColor(color)}}
-        style={styles.colorPicker} thumbSize={15} sliderHidden={true} gapSize={-40}
-        />
-
-        </View>
+          <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setIsPoppedUp(false)}></FAIcon>
+          <Text style={styles.colorChooseText}>Select a color that best fits your mood:</Text>
+            <View style={styles.colorSelectorView}>
+              <ColorPicker
+                onColorChange={(color)=>{setNewEmotionColor(color)}}
+                style={styles.colorPicker} thumbSize={15} sliderHidden={true} gapSize={-40}
+              />
+            </View>
           <Button style={styles.newEmotionButton}title="Create" onPress={()=>handlePopupClose()}></Button>
         </View>
       </Modal>
@@ -180,7 +174,7 @@ const styles = StyleSheet.create({
       alignItems:'center',
       backgroundColor:'#FFFFFF',
       width:'90%',
-      height:'75%',
+      height:'70%',
       marginTop:'auto',
       marginBottom:'auto',
       marginLeft:'auto',
@@ -201,12 +195,12 @@ const styles = StyleSheet.create({
     colorPicker:{
       marginLeft:'auto',
       marginRight:'auto',
-      bottom:'15%',
+      bottom:'5%',
       flex:1
     },
     colorChooseText:{
-      fontSize:'25px',
-      marginTop:'10%'
+      fontSize:'20px',
+      marginTop:'30%',
     },
     newEmotionText:{
       marginTop:'15%',
