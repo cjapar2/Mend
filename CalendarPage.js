@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         height: 1000
       },
       NavBarButtons: {
-        top: '35%',
+        top: '3%',
         alignContent: 'center',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
