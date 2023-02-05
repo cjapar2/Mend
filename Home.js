@@ -60,8 +60,11 @@ export default function Home({navigation}) {
         <View style={styles.popUpHeader}>
         <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setIsPoppedUp(false)}></FAIcon>
         <Text style={styles.popUpHeaderText}>Add a New Emotion</Text>
+        
         <TextInput style={styles.newEmotionText} placeholder="Enter Emotion" placeholderTextColor="#000000" value={emotionText} onChangeText={(val)=>setEmotionChange(val)}></TextInput>
+        
         <Text style={styles.colorChooseText}>Select a Color:</Text>
+
         <View style={styles.colorSelectorView}>
             <ColorPicker
         onColorChange={(color)=>{setNewEmotionColor(color)}}
@@ -82,29 +85,24 @@ export default function Home({navigation}) {
                 <Text style={styles.moodSquareEmotionText}>{emotion.emotion}</Text>
               </View>
             )
-            
           })}
 
-          <FAIcon style={styles.moodButton}onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={50} />
+          <FAIcon style={styles.moodButton}onPress={() => {setIsPoppedUp(true)}} name="plus-square" size={85} />
         </View>
-
-
 
         {/* Icon NavBar Buttons */}
         <View style={styles.NavBarButtons}>
-        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="FF8547"/>
-        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="FF8547"/>
-        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
+        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
         </View>
-        
     </View>
   )
 }
-
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#20444c',
+      backgroundColor: 'transparent',
       alignItems: 'center',
       justifyContent: 'center',
       height:'100%'
@@ -151,14 +149,13 @@ const styles = StyleSheet.create({
       color: 'white',
     },
     moodButtons: {
-        bottom: '%',
+        position: 'absolute',
+        bottom: '10%',
         alignContent: 'center',
         marginLeft:'5%',
         marginRight:'5%',
         flexDirection: 'row',
         flexWrap:'wrap',
-        borderRadius:'5px',
-        borderWidth:'2px',
     },
     moreMoodButtons: {
       justifyContent: 'center',
@@ -220,6 +217,13 @@ const styles = StyleSheet.create({
     },
     moodButtonView:{
       flexDirection:"wrap"
+    },
+    GradientBG: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: 1000
     },
 
   });
