@@ -2,49 +2,35 @@
 // Changes made by DAANISH KHAN
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput, View} from 'react-native';
-import {Text} from "react-native";
+import {SafeAreaView, StyleSheet, TextInput,Text} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+
 
 
 
 const TextInputExample = () => {
   const [text, onChangeText] = React.useState('How are you feeling?');
-  const [number, onChangeNumber] = React.useState('');
+
   
 
-
   return (
+    <SafeAreaView style={styles.container}>
 
-    
-    <SafeAreaView>
-        <LinearGradient
-      colors={["7AD7F0","92DFF3", "B7E9F7"]}
-      style={{
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        bottom: 0,
-        height: 900,
-        top: 0
-      }} >
-          
+<LinearGradient
+        // Background Linear Gradient
+        colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
+        start={{ x: 0.7, y: 0 }}
+        style={styles.GradientBG}
+      />
 
           <Text style={{fontSize: 20, margin: 80, textAlign: 'center'}}>
             Today's Journal Entry
-         </Text>
+          </Text>
 
          <TextInput
             style={styles.input} 
             placeholder="How are you feeling today?"
          />
-
-    
-        </LinearGradient>
-
-
-
-    
     
     </SafeAreaView>
 
@@ -64,9 +50,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     textAlignVertical:'top'
   },
+  GradientBG: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 1000
+  }
 
-
-  
 },);
 
 export default TextInputExample;
