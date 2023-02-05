@@ -89,7 +89,7 @@ export default function CalendarPage({route, navigation}) {
             </TouchableOpacity> */}
 
             <View style={styles.MicButton}>
-             <Icon onPress={() => navigation.navigate('Home')} name="microphone-plus" size={100} color="black"/>
+             <Icon onPress={() => navigation.navigate('VoiceMemo')} name="microphone-plus" size={100} color="black"/>
             </View> 
 
             {/* Icon NavBar Buttons */}
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
         height: 1000
       },
       NavBarButtons: {
-        top: '3%',
+        top: '35%',
         alignContent: 'center',
         justifyContent: 'space-evenly',
         flexDirection: 'row',

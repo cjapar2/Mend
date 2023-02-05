@@ -7,6 +7,7 @@ import Home from './Home';
 import CalendarPage from './CalendarPage';
 import JournalPage from './JournalPage';
 import HistoryPage from './HistoryPage';
+import VoiceMemo from './VoiceMemo';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="CalendarPage" component={CalendarPage} options={{headerShown: false}}/>
         <Stack.Screen name="JournalPage" component={JournalPage} options={{headerShown: false}}/>
         <Stack.Screen name="HistoryPage" component={HistoryPage} options={{headerShown: false}}/>
+        <Stack.Screen name="VoiceMemo" component={VoiceMemo} options={{headerShown: false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
