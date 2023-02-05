@@ -31,11 +31,7 @@ export default function HistoryPage({navigation}) {
 
 
              {/* Icon NavBar Buttons */}
-             <View style={styles.NavBarButtons}>
-             <Icon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
-             <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
-             <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
-            </View>
+          
 
         </View>
     )

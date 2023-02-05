@@ -17,12 +17,10 @@ import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 export default function JournalPage({navigation}){
   const [value, onChangeText] = React.useState();
 
-  useEffect(()=>{
-    console.log(value)
-  },[value])
+
 
   const submitJournalEntry = () =>{
-    navigation.navigate('CalendarPage',value)
+    navigation.navigate('CalendarPage',{journal:value})
   }
   return (
     <View style={styles.container}>
@@ -49,7 +47,7 @@ export default function JournalPage({navigation}){
           </View>
           </TouchableWithoutFeedback>
           
-          <TouchableOpacity style={styles.submitJournalEntryButton} onPress={submitJournalEntry()}><Text style={styles.submitText}>Submit</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.submitJournalEntryButton} onPress={()=>submitJournalEntry()}><Text style={styles.submitText}>Submit</Text></TouchableOpacity>
 
 
  </View>
@@ -67,11 +65,6 @@ export default function JournalPage({navigation}){
         /> */}
 
         {/* Icon NavBar Buttons */}
-        <View style={styles.NavBarButtons}>
-        <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
-        <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
-        <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
-        </View>
     
     </View>
 

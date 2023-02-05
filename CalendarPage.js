@@ -6,7 +6,9 @@ import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useIsFocused } from '@react-navigation/native';
 
 
 export default function CalendarPage({route, navigation}) {
@@ -14,27 +16,66 @@ export default function CalendarPage({route, navigation}) {
     const [isLoading, setIsLoading] = useState(true)
     const [modalVisible, setModalVisible] = useState(false);
     const [modalDate, setModalDate] = useState('');
+    const [colors, setColors] = useState()
+    const [dates,setDates] = useState()
+    const [journals, setJournals] = useState();
+    const isFocused = useIsFocused()
 
     /* Function that loads mood to local storage */
     /* TODO: Use this data to individually color calendar days */
 
     useEffect(()=>{
+        handleProps()
+
+    },[isFocused])
+
+
+    const handleProps = async() =>{
         if (route.params !== undefined){
-            console.log("waht")
-            let d = new Date();
-            let dFormatted = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
-            setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:route.params, startingDay:true,endingDay:true}})
+            console.log("ok")
+            let tempColor = "#00000"
+            let tempJournal = ""
+            if(route.params.color!==undefined){
+                console.log("here")
+                AsyncStorage.setItem("color",route.params.color)
+                tempColor = await AsyncStorage.getItem("color")
+                console.log(tempColor)
+            }
+            else if(route.params.journal!==undefined){
+                console.log(route.params.journal)
+                AsyncStorage.setItem("journal", route.params.journal)
+                tempJournal = await AsyncStorage.getItem("journal")
+                console.log(tempJournal)
+                tempColor = await AsyncStorage.getItem("color")
+            }
+            setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:'#228B22', startingDay:true,endingDay:true},'2023-02-05':{color:tempColor, startingDay:true,endingDay:true}})
+            setColors(['#FF0000','#FFA500',"#FFFF00","#228B22",tempColor])
+            setJournals(['Feeling Exhausted','Feeling Great! Just did well on my test!','Excited to go to the beach tomorrow!','Feeling content with my life right now',tempJournal])
         }
         else{
-            setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true}})
+            console.log("noway")
+            let sc = await AsyncStorage.getItem("color")
+            if (sc === undefined){
+                setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:'#228B22', startingDay:true,endingDay:true},})
+            setColors(['#FF0000','#FFA500',"#FFFF00","#228B22","#000000"])
+            }
+            else{
+                setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:'#228B22', startingDay:true,endingDay:true},'2023-02-05':{color:sc, startingDay:true,endingDay:true}})
+            setColors(['#FF0000','#FFA500',"#FFFF00","#228B22",sc])
+            }
+            let j = await AsyncStorage.getItem("journal")
+            if (j === undefined){
+                setJournals(['Feeling Exhausted','Feeling Great! Just did well on my test!','Excited to go to the beach tomorrow!','Feeling content with my life right now',''])
+            }
+            else{
+                setJournals(['Feeling Exhausted','Feeling Great! Just did well on my test!','Excited to go to the beach tomorrow!','Feeling content with my life right now',j])
+            }
+            
         }
-        loadMoodColor()
-
-    },[])
-    useEffect(()=>{
-        console.log(calendarColorData)
-    },[calendarColorData])
-
+        setDates(['2023-02-01','2023-02-02','2023-02-03','2023-02-04','2023-02-05'])
+        console.log("I did it!")
+        setIsLoading(false)
+    }
     const loadMoodColor = async () => {
         try {
             // create date object
@@ -55,20 +96,32 @@ export default function CalendarPage({route, navigation}) {
         colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
         style={styles.GradientBG}/>
 
-            <Modal style={{}} visible={modalVisible}>
+            {(modalVisible) && <Modal style={styles.calendarModal}>
+                        <LinearGradient
+                                // Background Linear Gradient
+                            colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
+                            start={{ x: 0.7, y: 0 }}
+                            style={styles.GradientBG}
+                        />
                 <View style={styles.popUpHeader}>
                     <Icon style={styles.popUpClose} size={20} name="close" onPress={()=>setModalVisible(false)}></Icon>
-                    <Text style={styles.popUpHeader}>Current Day: {modalDate["day"]}</Text>
+                    <Text style={styles.subheaders}>Date: {dates[modalDate["day"]-1]}</Text>
+                    <View style={styles.colorDisplayView}>
+                        <Text style={styles.subheaders}>Your Color Emotion: </Text>
+                        <FAIcon size={55} name="square" color={colors[modalDate["day"]-1]}></FAIcon>
+                    </View>
+                    <Text style={styles.subheaders}>Your Journal: </Text>
+                    <Text style={styles.journalText}> {journals[modalDate["day"]-1]}</Text>
                 </View>
-            </Modal>
+            </Modal>}
 
-            <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}
+            {!isLoading && <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}
                 onDayPress={e => {
                     console.log(e["day"]);
                     setModalVisible(true);
                     setModalDate(e);
                 }}
-            />
+            />}
             {/* <Icon style={styles.voiceButton} name="microphone"
                 onPress={() => navigation.navigate('JournalPage')}
                 size={30}
@@ -76,7 +129,7 @@ export default function CalendarPage({route, navigation}) {
 
             <TouchableOpacity style={styles.JournalButton}
                 title="textButton"
-                onPress={() => navigation.navigate('JournalPage')}
+                onPress={() =>navigation.navigate('JournalPage')}
             >
 
                 <Text style={styles.JournalButtonText}>Journal Entry</Text>
@@ -92,12 +145,6 @@ export default function CalendarPage({route, navigation}) {
              <Icon onPress={() => navigation.navigate('VoiceMemo')} name="microphone-plus" size={100} color="black"/>
             </View> 
 
-            {/* Icon NavBar Buttons */}
-            <View style={styles.NavBarButtons}>
-             <Icon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
-             <Icon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
-             <Icon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
-            </View>
 
 
 
@@ -112,6 +159,19 @@ const styles = StyleSheet.create({
       backgroundColor: '#20444c',
       alignItems: 'center',
       justifyContent: 'center',
+      width:"100%",
+      height:"100%"
+    },
+    journalText:{
+        height:'50%',
+        width:'88%',
+        borderColor:'black',
+        borderWidth:'5px',
+        borderRadius:'10px',
+        fontSize:16,
+        margin:'10%'
+    },
+    calendarModal:{
     },
     calendar: {
         borderRadius: 10,
@@ -140,7 +200,8 @@ const styles = StyleSheet.create({
       marginTop:'auto',
       marginBottom:'auto',
       marginLeft:'auto',
-      marginRight:'auto'
+      marginRight:'auto',
+      flexDirection:'column'
     },
     GradientBG: {
         position: 'absolute',
@@ -150,7 +211,7 @@ const styles = StyleSheet.create({
         height: 1000
       },
       NavBarButtons: {
-        top: '35%',
+        top: '27%',
         alignContent: 'center',
         justifyContent: 'space-evenly',
         flexDirection: 'row',
@@ -171,5 +232,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         padding: 1
 
+      },
+      colorDisplayView:{
+        flexDirection:'row'
+      },
+      subheaders:{
+        fontSize:30,
+        margin:20
       }
   });

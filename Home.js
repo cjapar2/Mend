@@ -63,10 +63,10 @@ export default function Home({navigation}) {
             <View style={styles.colorSelectorView}>
               <ColorPicker
                 onColorChange={(color)=>{setNewEmotionColor(color)}}
-                style={styles.colorPicker} thumbSize={15} sliderHidden={true} gapSize={-40}
+                style={styles.colorPicker} thumbSize={15} sliderHidden={true} gapSize={-20}
               />
             </View>
-          <Button style={styles.newEmotionButton}title="Create" onPress={()=>handlePopupClose()}></Button>
+          <TouchableOpacity style={styles.newEmotionButton} onPress={()=>handlePopupClose()}><Text style={{fontSize:30}}>Create</Text></TouchableOpacity>
         </View>
       </Modal>
       <StatusBar style="auto" />
@@ -77,7 +77,7 @@ export default function Home({navigation}) {
             {allEmotions.map((emotion)=>{
               return (
                 <View key={emotion.color} style={styles.moodButtonView}>
-                  <FAIcon style={styles.moodButton} onPress={()=>saveMood(emotion.color,emotion.emotion)} name="square" size={85} color={emotion.color}/>
+                  <FAIcon style={styles.moodButton} onPress={()=>saveMood({color:emotion.color})} name="square" size={85} color={emotion.color}/>
                   <Text style={styles.moodSquareEmotionText}>{emotion.emotion}</Text>
                 </View>
               )
@@ -88,11 +88,6 @@ export default function Home({navigation}) {
         </View>
 
       {/* Icon NavBar Buttons */}
-      <View style={styles.NavBarButtons}>
-      <MCIcon onPress={() => navigation.navigate('CalendarPage')} name="calendar-heart" size={70} color="#FF8547"/>
-      <MCIcon onPress={() => navigation.navigate('Home')} name="home-group" size={70} color="#FF8547"/>
-      <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
-      </View>
     </View>
   )
 }
@@ -195,7 +190,6 @@ const styles = StyleSheet.create({
     colorPicker:{
       marginLeft:'auto',
       marginRight:'auto',
-      bottom:'5%',
       flex:1
     },
     colorChooseText:{
@@ -210,7 +204,10 @@ const styles = StyleSheet.create({
       height:35,
     },
     newEmotionButton:{
-      marginBottom:"20%"
+      marginBottom:"20%",
+      borderColor:'black',
+      borderRadius:'6px',
+      borderWidth:'3px'
     },
     colorSelectorView:{
       height:"40%",
