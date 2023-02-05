@@ -22,7 +22,6 @@ export default function Home({navigation}) {
     setAllEmotions(temp)
     setEmotionChange('')
   }
-  const [mood, setMood] = useState('')
   
   /* Function that saves mood to local storage */
   const saveMood = async (e) => {

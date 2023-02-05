@@ -1,16 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,  Text, View, TouchableOpacity, Button } from 'react-native';
+import { StyleSheet,  Text, View, TouchableOpacity, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Calendar } from 'react-native-calendars';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useEffect, useState} from 'react'
+import FAIcon from 'react-native-vector-icons/FontAwesome';
 
 
 export default function CalendarPage({route}) {
     const [calendarColorData, setCalendarColorData] = useState()
     const [isLoading, setIsLoading] = useState(true)
+    const [modalVisible, setModalVisible] = useState(false);
+    const [modalDate, setModalDate] = useState('');
 
     /* Function that loads mood to local storage */
     /* TODO: Use this data to individually color calendar days */
@@ -31,6 +34,7 @@ export default function CalendarPage({route}) {
     useEffect(()=>{
         console.log(calendarColorData)
     },[calendarColorData])
+
     const loadMoodColor = async () => {
         try {
             // create date object
@@ -42,10 +46,24 @@ export default function CalendarPage({route}) {
             alert(err);
         }
     }
+
     return (
         <View style={styles.container} theme={{textDayFontSize: 200}}>
 
-            <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}/>
+            <Modal style={{}} visible={modalVisible}>
+                <View style={styles.popUpHeader}>
+                    <FAIcon style={styles.popUpClose} size={20} name="close" onPress={()=>setModalVisible(false)}></FAIcon>
+                    <Text style={styles.popUpHeader}>Current Day: {modalDate["day"]}</Text>
+                </View>
+            </Modal>
+
+            <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}
+                onDayPress={e => {
+                    console.log(e["day"]);
+                    setModalVisible(true);
+                    setModalDate(e);
+                }}
+            />
             <Icon style={styles.voiceButton} name="microphone"
                 onPress={() => navigation.navigate('JournalPage')}
                 size={30}
@@ -93,5 +111,15 @@ const styles = StyleSheet.create({
         borderRadius: 500,
         display: 'inline-block',
         padding: 20
-    }
+    },
+    popUpHeader:{
+      alignItems:'center',
+      backgroundColor:'#FFFFFF',
+      width:'90%',
+      height:'75%',
+      marginTop:'auto',
+      marginBottom:'auto',
+      marginLeft:'auto',
+      marginRight:'auto'
+    },
   });
