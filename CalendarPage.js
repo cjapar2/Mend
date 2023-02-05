@@ -9,7 +9,7 @@ import {useEffect, useState} from 'react'
 
 
 export default function CalendarPage({route}) {
-    const [calendarColorData, setCalendarColorData] = useState({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true}})
+    const [calendarColorData, setCalendarColorData] = useState()
     const [isLoading, setIsLoading] = useState(true)
 
     /* Function that loads mood to local storage */
@@ -17,17 +17,19 @@ export default function CalendarPage({route}) {
 
     useEffect(()=>{
         if (route.params !== undefined){
+            console.log("waht")
             let d = new Date();
             let dFormatted = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
-            temp['2023-02-04'] = {color:route.params, startingDay:true, endingDay:true}
-            setCalendarColorData(temp)
+            setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:route.params, startingDay:true,endingDay:true}})
+        }
+        else{
+            setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true}})
         }
         loadMoodColor()
 
     },[])
     useEffect(()=>{
         console.log(calendarColorData)
-        calendarColorData = Object.assign(calendarColorData)
     },[calendarColorData])
     const loadMoodColor = async () => {
         try {
@@ -42,15 +44,18 @@ export default function CalendarPage({route}) {
     }
     return (
         <View style={styles.container} theme={{textDayFontSize: 200}}>
+
             <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}/>
             <Icon style={styles.voiceButton} name="microphone"
                 onPress={() => navigation.navigate('JournalPage')}
                 size={30}
             />
+
             <TouchableOpacity style={styles.textButton}
                 title="textButton"
                 onPress={() => navigation.navigate('JournalPage')}
             >
+
                 <Text>Journal Entry</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.textButton}
@@ -59,6 +64,7 @@ export default function CalendarPage({route}) {
             >
                 <Text>Journal Entry</Text>
             </TouchableOpacity>
+
         </View>
     )
 }
