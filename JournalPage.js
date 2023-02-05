@@ -2,19 +2,22 @@
 // Changes made by DAANISH KHAN
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, TextInput,Text} from 'react-native';
+import { StyleSheet,  Text, View, TouchableOpacity, Button } from 'react-native';
+import { TextInput, } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 
 
-const TextInputExample = () => {
-  const [text, onChangeText] = React.useState('How are you feeling?');
+// const TextInputExample = () => {
+//   const [text, onChangeText] = React.useState('How are you feeling?');
 
-  
+const MultilineTextInputExample = () => {
+  const [value, onChangeText] = React.useState('Useless Multiline Placeholder');
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
 
 <LinearGradient
         // Background Linear Gradient
@@ -22,15 +25,41 @@ const TextInputExample = () => {
         start={{ x: 0.7, y: 0 }}
         style={styles.GradientBG}
 />
+          <Text style={styles.JournalEntry}>Today's Journal Entry</Text>
 
-          <Text style={{fontSize: 20, margin: 80, textAlign: 'center'}}>
-            Today's Journal Entry
-          </Text>
+          <View
+      style={{
+        backgroundColor: value,
+        borderBottomColor: '#000000',
+        borderBottomWidth: 3,
+        fontSize: '24',
+      }}>
 
-         <TextInput
+          <TextInput
+        editable
+        multiline
+        numberOfLines={4}
+        onChangeText={text => onChangeText(text)}
+        value={value}
+        style={{padding: 10}}
+        returnKeyType="done"
+        
+      />
+
+
+ </View>
+
+          {/* <TextInput
+        style={{height: 40}}
+        placeholder="Type here to translate!"
+        onChangeText={newText => setText(newText)}
+        defaultValue={text}
+      /> */}
+
+         {/* <TextInput
             style={styles.input} 
             placeholder="How are you feeling today?"
-        />
+        /> */}
 
         {/* Icon NavBar Buttons */}
         <View style={styles.NavBarButtons}>
@@ -39,7 +68,7 @@ const TextInputExample = () => {
         <MCIcon onPress={() => navigation.navigate('HistoryPage')} name="history" size={70} color="#FF8547"/>
         </View>
     
-    </SafeAreaView>
+    </View>
 
 
     
@@ -49,13 +78,20 @@ const TextInputExample = () => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    height: 40,
-    margin: 20,
-    borderWidth: 3,
-    padding: 10,
-    backgroundColor: '#fff',
-    textAlignVertical:'top'
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height:'100%'
+  },
+  JournalEntry: {
+    bottom:'37%',
+    alignContent:'center',
+    fontSize: '29px',
+    fontWeight: '700',
+    color: 'white',
+    animationType:'fade-in',
   },
   GradientBG: {
     position: 'absolute',
@@ -63,9 +99,16 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: 1000
-  }
+  },
+  NavBarButtons:{
+    alignContent:'center',
+    justifyContent:'center',
+    flexDirection:'row',
+    position:'absolute',
+    bottom:"1%"
+  },
 
 },);
 
-export default TextInputExample;
+export default MultilineTextInputExample;
 
