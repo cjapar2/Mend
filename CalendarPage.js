@@ -32,20 +32,15 @@ export default function CalendarPage({route, navigation}) {
 
     const handleProps = async() =>{
         if (route.params !== undefined){
-            console.log("ok")
             let tempColor = "#00000"
             let tempJournal = ""
             if(route.params.color!==undefined){
-                console.log("here")
                 AsyncStorage.setItem("color",route.params.color)
                 tempColor = await AsyncStorage.getItem("color")
-                console.log(tempColor)
             }
             else if(route.params.journal!==undefined){
-                console.log(route.params.journal)
                 AsyncStorage.setItem("journal", route.params.journal)
                 tempJournal = await AsyncStorage.getItem("journal")
-                console.log(tempJournal)
                 tempColor = await AsyncStorage.getItem("color")
             }
             setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:'#228B22', startingDay:true,endingDay:true},'2023-02-05':{color:tempColor, startingDay:true,endingDay:true}})
@@ -53,7 +48,6 @@ export default function CalendarPage({route, navigation}) {
             setJournals(['Feeling Exhausted','Feeling Great! Just did well on my test!','Excited to go to the beach tomorrow!','Feeling content with my life right now',tempJournal])
         }
         else{
-            console.log("noway")
             let sc = await AsyncStorage.getItem("color")
             if (sc === undefined){
                 setCalendarColorData({'2023-02-01': {color:'#FF0000',startingDay:true, endingDay:true},'2023-02-02': {color:'#FFA500', startingDay:true, endingDay:true},'2023-02-03':{color:"#FFFF00",startingDay:true, endingDay:true},'2023-02-04':{color:'#228B22', startingDay:true,endingDay:true},})
@@ -73,19 +67,7 @@ export default function CalendarPage({route, navigation}) {
             
         }
         setDates(['2023-02-01','2023-02-02','2023-02-03','2023-02-04','2023-02-05'])
-        console.log("I did it!")
         setIsLoading(false)
-    }
-    const loadMoodColor = async () => {
-        try {
-            // create date object
-            let d = new Date();
-            // format date DD-MM-YYYY
-            let dFormatted = d.getDate() + '-' + (d.getMonth()+1) + '-' + d.getFullYear();
-            console.log('current date', dFormatted);
-        } catch (err) {
-            alert(err);
-        }
     }
 
     return (
@@ -117,7 +99,6 @@ export default function CalendarPage({route, navigation}) {
 
             {!isLoading && <Calendar key={calendarColorData} markingType={'period'}markedDates={calendarColorData} style={styles.calendar}
                 onDayPress={e => {
-                    console.log(e["day"]);
                     setModalVisible(true);
                     setModalDate(e);
                 }}
