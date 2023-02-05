@@ -17,20 +17,17 @@ export default function HistoryPage({navigation}) {
         style={styles.GradientBG}
       />
 
-
         <View style={styles.BigMainRectangle}>
             <View style={styles.SmallMendRectangle}>
                 <Text style={styles.InitialMSG}>Hope you're doing great! Here is your Mend Report from this DATE</Text>
             </View>
             <View style={styles.UserFeedbackRectangle}>
+
+                
                 <Text style={styles.FeedbackMSG}>USER INPUT</Text>
             </View>
 
         </View>
-
-
-
-
 
 
              {/* Icon NavBar Buttons */}
@@ -58,14 +55,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
       },
     BigMainRectangle: {
-        backgroundColor: '#bdb8a5',
+        backgroundColor: 'transparent',
         top:'3%',
         height: 710,
         width: 390,
         borderRadius: 19,
       },
     SmallMendRectangle: {
-        backgroundColor: 'green',
+        backgroundColor: '#CED0DE',
         alignContent: 'center',
         left: '6%',
         top: '4%',
@@ -84,7 +81,7 @@ const styles = StyleSheet.create({
         margin: 1, 
     },    
     UserFeedbackRectangle: {
-        backgroundColor: 'green',
+        backgroundColor: '#CED0DE',
         alignContent: 'center',
         left: '6%',
         top: '8%',
