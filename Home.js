@@ -42,7 +42,6 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-
       <LinearGradient
         // Background Linear Gradient
         colors={['#FFA071', '#FFB480', '#FEC98F', '#FEDD9E','#FDF1AD']}
@@ -78,7 +77,6 @@ export default function Home({navigation}) {
               return (
                 <View key={emotion.color} style={styles.moodButtonView}>
                   <FAIcon style={styles.moodButton} onPress={()=>saveMood({color:emotion.color})} name="square" size={85} color={emotion.color}/>
-                  <Text style={styles.moodSquareEmotionText}>{emotion.emotion}</Text>
                 </View>
               )
             })}
